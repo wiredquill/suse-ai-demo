@@ -1,0 +1,196 @@
+{
+  "apiVersion": "fleet.cattle.io/v1alpha1",
+  "kind": "HelmOp",
+  "metadata": {
+    "name": "suse-ai-ollama-erin-ollama-c-m-jdd5l58w",
+    "namespace": "fleet-default"
+  },
+  "spec": {
+    "defaultNamespace": "erin-ollama",
+    "helm": {
+      "version": "1.55.0",
+      "repo": "oci://dp.apps.rancher.io/charts/ollama",
+      "releaseName": "ollama",
+      "values": {
+        "affinity": {},
+        "autoscaling": {
+          "enabled": false,
+          "maxReplicas": 100,
+          "minReplicas": 1,
+          "targetCPUUtilizationPercentage": 80
+        },
+        "deployment": {
+          "labels": {}
+        },
+        "extraArgs": [],
+        "extraEnv": [],
+        "extraEnvFrom": [],
+        "extraObjects": [],
+        "fullnameOverride": "",
+        "global": {
+          "imagePullSecrets": [
+            {
+              "name": "suse-ai-pull-combined"
+            }
+          ],
+          "imageRegistry": ""
+        },
+        "hostIPC": false,
+        "hostNetwork": false,
+        "hostPID": false,
+        "image": {
+          "pullPolicy": "IfNotPresent",
+          "registry": "dp.apps.rancher.io",
+          "repository": "containers/ollama",
+          "tag": "0.21.2-11.48"
+        },
+        "imagePullSecrets": [
+          {
+            "name": "suse-ai-pull-combined"
+          }
+        ],
+        "ingress": {
+          "annotations": {},
+          "className": "",
+          "enabled": false,
+          "hosts": [
+            {
+              "host": "ollama.local",
+              "paths": [
+                {
+                  "path": "/",
+                  "pathType": "Prefix"
+                }
+              ]
+            }
+          ],
+          "tls": []
+        },
+        "initContainers": [],
+        "knative": {
+          "annotations": {},
+          "containerConcurrency": 0,
+          "enabled": false,
+          "idleTimeoutSeconds": 300,
+          "modelBootstrap": {
+            "ttlSecondsAfterFinished": 300
+          },
+          "responseStartTimeoutSeconds": 300,
+          "timeoutSeconds": 300
+        },
+        "lifecycle": {},
+        "livenessProbe": {
+          "enabled": true,
+          "failureThreshold": 6,
+          "initialDelaySeconds": 60,
+          "path": "/",
+          "periodSeconds": 10,
+          "successThreshold": 1,
+          "timeoutSeconds": 5
+        },
+        "nameOverride": "",
+        "namespaceOverride": "",
+        "nodeSelector": {},
+        "ollama": {
+          "gpu": {
+            "draDriverClass": "gpu.nvidia.com",
+            "draEnabled": false,
+            "draExistingClaimTemplate": "",
+            "enabled": false,
+            "mig": {
+              "devices": {},
+              "enabled": false
+            },
+            "number": 1,
+            "nvidiaResource": "nvidia.com/gpu",
+            "type": "nvidia"
+          },
+          "insecure": false,
+          "models": {
+            "clean": false,
+            "create": [],
+            "pull": [],
+            "run": []
+          },
+          "mountPath": "",
+          "port": 11434
+        },
+        "persistentVolume": {
+          "accessModes": [
+            "ReadWriteOnce"
+          ],
+          "annotations": {},
+          "enabled": false,
+          "existingClaim": "",
+          "size": "30Gi",
+          "storageClass": "",
+          "subPath": "",
+          "volumeMode": "",
+          "volumeName": ""
+        },
+        "podAnnotations": {},
+        "podLabels": {},
+        "podSchedulerName": "",
+        "podSecurityContext": {},
+        "priorityClassName": "",
+        "readinessProbe": {
+          "enabled": true,
+          "failureThreshold": 6,
+          "initialDelaySeconds": 30,
+          "path": "/",
+          "periodSeconds": 5,
+          "successThreshold": 1,
+          "timeoutSeconds": 3
+        },
+        "replicaCount": 1,
+        "resources": {
+          "limits": {},
+          "requests": {}
+        },
+        "runtimeClassName": "",
+        "securityContext": {},
+        "service": {
+          "annotations": {},
+          "ipFamilies": [],
+          "ipFamilyPolicy": "",
+          "labels": {},
+          "loadBalancerIP": null,
+          "nodePort": 31434,
+          "port": 11434,
+          "type": "ClusterIP"
+        },
+        "serviceAccount": {
+          "annotations": {},
+          "automount": true,
+          "create": true,
+          "name": ""
+        },
+        "terminationGracePeriodSeconds": 120,
+        "tests": {
+          "annotations": {},
+          "enabled": true,
+          "labels": {}
+        },
+        "tolerations": [],
+        "topologySpreadConstraints": {},
+        "updateStrategy": {
+          "type": "Recreate"
+        },
+        "volumeMounts": [],
+        "volumes": []
+      },
+      "disablePreProcess": true,
+      "takeOwnership": true
+    },
+    "targets": [
+      {
+        "clusterSelector": {
+          "matchLabels": {
+            "management.cattle.io/cluster-name": "c-m-jdd5l58w"
+          }
+        }
+      }
+    ],
+    "helmSecretName": "application-collection-auth"
+  }
+}
