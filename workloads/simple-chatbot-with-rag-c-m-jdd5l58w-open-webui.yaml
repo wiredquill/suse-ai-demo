@@ -1,0 +1,328 @@
+{
+  "apiVersion": "fleet.cattle.io/v1alpha1",
+  "kind": "HelmOp",
+  "metadata": {
+    "name": "simple-chatbot-with-rag-c-m-jdd5l58w-open-webui",
+    "namespace": "fleet-default"
+  },
+  "spec": {
+    "defaultNamespace": "simple-chatbot-with-rag-system",
+    "helm": {
+      "disablePreProcess": true,
+      "releaseName": "open-webui",
+      "repo": "oci://dp.apps.rancher.io/charts/open-webui",
+      "takeOwnership": true,
+      "values": {
+        "affinity": {},
+        "annotations": {},
+        "args": [],
+        "clusterDomain": "cluster.local",
+        "command": [],
+        "commonEnvVars": [],
+        "containerSecurityContext": {},
+        "copyAppData": {
+          "args": [],
+          "command": [],
+          "resources": {}
+        },
+        "databaseUrl": "",
+        "enableOpenaiApi": true,
+        "extraEnvFrom": [],
+        "extraEnvVars": [
+          {
+            "name": "DEFAULT_MODELS",
+            "value": "qwen2.5:3b"
+          },
+          {
+            "name": "DEFAULT_USER_ROLE",
+            "value": "user"
+          },
+          {
+            "name": "ENABLE_SIGNUP",
+            "value": "true"
+          },
+          {
+            "name": "GLOBAL_LOG_LEVEL",
+            "value": "INFO"
+          },
+          {
+            "name": "RAG_EMBEDDING_MODEL",
+            "value": "sentence-transformers/all-MiniLM-L6-v2"
+          },
+          {
+            "name": "VECTOR_DB",
+            "value": "chroma"
+          },
+          {
+            "name": "INSTALL_NLTK_DATASETS",
+            "value": "true"
+          }
+        ],
+        "extraLabels": {},
+        "extraResources": [],
+        "global": {
+          "imagePullSecrets": [
+            {
+              "name": "suse-ai-pull-combined"
+            }
+          ],
+          "imageRegistry": "",
+          "tls": {
+            "additionalTrustedCAs": false,
+            "issuerName": "suse-private-ai",
+            "letsEncrypt": {
+              "email": "none@example.com",
+              "environment": "staging",
+              "ingress": {
+                "class": ""
+              }
+            },
+            "source": "suse-private-ai"
+          }
+        },
+        "hostAliases": [],
+        "image": {
+          "pullPolicy": "IfNotPresent",
+          "registry": "dp.apps.rancher.io",
+          "repository": "containers/open-webui",
+          "tag": "0.6.41-14.20",
+          "useSlim": false
+        },
+        "imagePullSecrets": [
+          {
+            "name": "suse-ai-pull-combined"
+          }
+        ],
+        "ingress": {
+          "additionalHosts": [],
+          "annotations": {
+            "nginx.ingress.kubernetes.io/ssl-redirect": "true"
+          },
+          "class": "traefik",
+          "enabled": true,
+          "existingSecret": "",
+          "extraLabels": {},
+          "host": "suse-ollama-webui.dev-ai.dna-42.com",
+          "tls": true
+        },
+        "livenessProbe": {},
+        "logging": {
+          "components": {
+            "audio": "",
+            "comfyui": "",
+            "config": "",
+            "db": "",
+            "images": "",
+            "main": "",
+            "models": "",
+            "ollama": "",
+            "openai": "",
+            "rag": "",
+            "webhook": ""
+          },
+          "level": ""
+        },
+        "managedCertificate": {
+          "domains": [
+            "chat.example.com"
+          ],
+          "enabled": false,
+          "name": "mydomain-chat-cert"
+        },
+        "nameOverride": "",
+        "namespaceOverride": "",
+        "nodeSelector": {},
+        "ollama": {
+          "enabled": false,
+          "fullnameOverride": "open-webui-ollama"
+        },
+        "ollamaUrls": [
+          "http://ollama:11434"
+        ],
+        "ollamaUrlsFromExtraEnv": false,
+        "openaiApiKeys": [],
+        "openaiBaseApiUrls": [],
+        "persistence": {
+          "accessModes": [
+            "ReadWriteOnce"
+          ],
+          "annotations": {},
+          "azure": {
+            "container": "",
+            "endpointUrl": "",
+            "key": "",
+            "keyExistingSecret": "",
+            "keyExistingSecretKey": ""
+          },
+          "enabled": true,
+          "existingClaim": "",
+          "gcs": {
+            "appCredentialsJson": "",
+            "appCredentialsJsonExistingSecret": "",
+            "appCredentialsJsonExistingSecretKey": "",
+            "bucket": ""
+          },
+          "provider": "local",
+          "s3": {
+            "accessKey": "",
+            "accessKeyExistingAccessKey": "",
+            "accessKeyExistingSecret": "",
+            "bucket": "",
+            "endpointUrl": "",
+            "keyPrefix": "",
+            "region": "",
+            "secretKey": "",
+            "secretKeyExistingSecret": "",
+            "secretKeyExistingSecretKey": ""
+          },
+          "selector": {},
+          "size": "20Gi",
+          "storageClass": "",
+          "subPath": ""
+        },
+        "pipelines": {
+          "enabled": false,
+          "extraEnvVars": []
+        },
+        "podAnnotations": {},
+        "podLabels": {},
+        "podSecurityContext": {},
+        "priorityClassName": "",
+        "readinessProbe": {},
+        "replicaCount": 1,
+        "resources": {},
+        "revisionHistoryLimit": 10,
+        "runtimeClassName": "",
+        "service": {
+          "annotations": {},
+          "containerPort": 8080,
+          "labels": {},
+          "loadBalancerClass": "",
+          "nodePort": "",
+          "port": 80,
+          "type": "ClusterIP"
+        },
+        "serviceAccount": {
+          "annotations": {},
+          "automountServiceAccountToken": false,
+          "create": true,
+          "enable": true,
+          "name": "existing-sa"
+        },
+        "sso": {
+          "enableGroupManagement": false,
+          "enableRoleManagement": false,
+          "enableSignup": false,
+          "enabled": false,
+          "github": {
+            "clientExistingSecret": "",
+            "clientExistingSecretKey": "",
+            "clientId": "",
+            "clientSecret": "",
+            "enabled": false
+          },
+          "google": {
+            "clientExistingSecret": "",
+            "clientExistingSecretKey": "",
+            "clientId": "",
+            "clientSecret": "",
+            "enabled": false
+          },
+          "groupManagement": {
+            "groupsClaim": "groups"
+          },
+          "mergeAccountsByEmail": false,
+          "microsoft": {
+            "clientExistingSecret": "",
+            "clientExistingSecretKey": "",
+            "clientId": "",
+            "clientSecret": "",
+            "enabled": false,
+            "tenantId": ""
+          },
+          "oidc": {
+            "clientExistingSecret": "",
+            "clientExistingSecretKey": "",
+            "clientId": "",
+            "clientSecret": "",
+            "enabled": false,
+            "providerName": "SSO",
+            "providerUrl": "",
+            "scopes": "openid email profile"
+          },
+          "roleManagement": {
+            "adminRoles": "",
+            "allowedRoles": "",
+            "rolesClaim": "roles"
+          },
+          "trustedHeader": {
+            "emailHeader": "",
+            "enabled": false,
+            "nameHeader": ""
+          }
+        },
+        "startupProbe": {},
+        "strategy": {},
+        "tika": {
+          "enabled": false
+        },
+        "tolerations": [],
+        "topologySpreadConstraints": [],
+        "volumeMounts": {
+          "container": [],
+          "initContainer": []
+        },
+        "volumes": [],
+        "websocket": {
+          "enabled": true,
+          "manager": "redis",
+          "nodeSelector": {},
+          "redis": {
+            "affinity": {},
+            "annotations": {},
+            "args": [],
+            "command": [],
+            "containerSecurityContext": {},
+            "enabled": true,
+            "image": {
+              "pullPolicy": "IfNotPresent",
+              "registry": "dp.apps.rancher.io",
+              "repository": "containers/redis",
+              "tag": "8.4.0-2.1"
+            },
+            "labels": {},
+            "name": "open-webui-redis",
+            "podSecurityContext": {},
+            "pods": {
+              "annotations": {},
+              "labels": {}
+            },
+            "resources": {},
+            "service": {
+              "annotations": {},
+              "containerPort": 6379,
+              "labels": {},
+              "nodePort": "",
+              "port": 6379,
+              "portName": "http",
+              "type": "ClusterIP"
+            },
+            "tolerations": []
+          },
+          "url": "redis://open-webui-redis:6379/0"
+        }
+      },
+      "version": "8.19.1"
+    },
+    "helmSecretName": "application-collection-auth",
+    "targets": [
+      {
+        "clusterSelector": {
+          "matchLabels": {
+            "management.cattle.io/cluster-name": "c-m-jdd5l58w"
+          }
+        }
+      }
+    ]
+  }
+}
